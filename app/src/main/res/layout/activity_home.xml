@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lemon"
+    tools:context=".HomeActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo_da"
+            android:padding="15sp"
+            android:text="Recipes"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:cardCornerRadius="15sp"
+            app:cardElevation="8sp">
+
+            <android.widget.SearchView
+                android:id="@+id/search_bar"
+                android:queryHint="What do you wanna try today?"
+                android:theme="@style/ThemeOverlay.Search"
+                android:iconifiedByDefault="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_bar_properties"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mainCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="1"
+            android:layout_margin="10sp"
+            android:orientation="horizontal"
+            tools:listitem="@layout/main_category_item_rv" />
+
+        <TextView
+            android:id="@+id/font"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/baloo"
+            android:paddingStart="15sp"
+            android:text="Category"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_subCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="1"
+            android:layout_margin="10sp"
+            android:orientation="horizontal"
+            tools:listitem="@layout/sub_category_item_rv" />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kitchendiaries.R
 import com.example.kitchendiaries.entities.RecipeModel
 
-class MainCatAdapter: RecyclerView.Adapter<MainCatAdapter.RecipeViewholder>() {
+class SubCatAdapter: RecyclerView.Adapter<SubCatAdapter.RecipeViewholder>() {
 
     var mainCatList = ArrayList<RecipeModel>()
 

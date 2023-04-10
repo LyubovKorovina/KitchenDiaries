@@ -3,16 +3,18 @@ package com.example.kitchendiaries.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kitchendiaries.R
 import com.example.kitchendiaries.entities.RecipeModel
-import com.example.kitchendiaries.database.
+
 class MainCatAdapter: RecyclerView.Adapter<MainCatAdapter.RecipeViewholder>() {
 
     var mainCatList = ArrayList<RecipeModel>()
 
-    class RecipeViewholder(view: View): RecyclerView.ViewHolder(view){
 
+    class RecipeViewholder(view: View): RecyclerView.ViewHolder(view){
+        val tvRecipeName: TextView = itemView.findViewById(R.id.tv_dish_name)
     }
 
     //this function is needed to set data from home HomeActivity
@@ -21,6 +23,7 @@ class MainCatAdapter: RecyclerView.Adapter<MainCatAdapter.RecipeViewholder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewholder {
+
         return RecipeViewholder(LayoutInflater.from(parent.context).inflate(R.layout.main_category_item_rv, parent, false))
     }
 
@@ -29,7 +32,10 @@ class MainCatAdapter: RecyclerView.Adapter<MainCatAdapter.RecipeViewholder>() {
     }
 
     override fun onBindViewHolder(holder: RecipeViewholder, position: Int) {
-        holder.itemView.tv_dish_name.text =
+        val recipes = mainCatList[position]
+        holder.apply {
+            tvRecipeName.text = recipes.mealName
+        }
     }
 
 }

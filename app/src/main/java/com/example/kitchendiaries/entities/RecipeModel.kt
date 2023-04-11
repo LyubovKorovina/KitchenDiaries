@@ -3,7 +3,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity;
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Recipies")
+@Entity(tableName = "Recipes")
 data class RecipeModel (
     @PrimaryKey(autoGenerate = true)
     var id:Int,

@@ -10,7 +10,7 @@ import com.example.kitchendiaries.entities.RecipeModel
 
 class SubCatAdapter: RecyclerView.Adapter<SubCatAdapter.RecipeViewholder>() {
 
-    var mainCatList = ArrayList<RecipeModel>()
+    var subCatList = ArrayList<RecipeModel>()
 
 
     class RecipeViewholder(view: View): RecyclerView.ViewHolder(view){
@@ -19,20 +19,20 @@ class SubCatAdapter: RecyclerView.Adapter<SubCatAdapter.RecipeViewholder>() {
 
     //this function is needed to set data from home HomeActivity
     fun setData(arrData : List<RecipeModel>){
-        mainCatList = arrData as ArrayList<RecipeModel>
+        subCatList = arrData as ArrayList<RecipeModel>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewholder {
 
-        return RecipeViewholder(LayoutInflater.from(parent.context).inflate(R.layout.main_category_item_rv, parent, false))
+        return RecipeViewholder(LayoutInflater.from(parent.context).inflate(R.layout.sub_category_item_rv, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return mainCatList.size
+        return subCatList.size
     }
 
     override fun onBindViewHolder(holder: RecipeViewholder, position: Int) {
-        val recipes = mainCatList[position]
+        val recipes = subCatList[position]
         holder.apply {
             tvRecipeName.text = recipes.mealName
         }

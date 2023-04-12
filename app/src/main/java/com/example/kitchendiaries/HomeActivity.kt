@@ -11,7 +11,7 @@ import com.example.kitchendiaries.adapters.SubCatAdapter
 import com.example.kitchendiaries.entities.RecipeModel
 
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : MainActivity() {
 
     //Here we are initializing Adapter and Category array lists
     var mainCatArray = ArrayList<RecipeModel>()

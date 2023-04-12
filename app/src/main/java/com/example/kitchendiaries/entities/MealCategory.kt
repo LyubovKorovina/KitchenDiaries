@@ -1,8 +1,7 @@
 package com.example.kitchendiaries.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
+import com.example.kitchendiaries.entities.converter.MealCatListConverter
 
 @Entity(tableName = "MealCategory")
 
@@ -11,5 +10,7 @@ data class MealCategory(
     var id:Int,
 
     @ColumnInfo(name = "mealcategories")
-    val mealcategories: List<MealCategoryItems>
+    //Type converters annotation
+    @TypeConverters(MealCatListConverter::class)
+    val mealcategories: List<MealCategoryItems>? = null
 )

@@ -15,10 +15,9 @@ import android.widget.ImageView
 
 class MainCatAdapter: RecyclerView.Adapter<MainCatAdapter.RecipeViewholder>() {
 
-    var listener: AdapterView.OnItemClickListener? = null
+    var listener: OnItemClickListener? = null
     var ctx: Context? = null
     var mainCatList = ArrayList<MealCategoryItems>()
-
 
     class RecipeViewholder(view: View): RecyclerView.ViewHolder(view) {
         val tvRecipeName: TextView = view.findViewById(R.id.tv_dish_name)
@@ -28,6 +27,10 @@ class MainCatAdapter: RecyclerView.Adapter<MainCatAdapter.RecipeViewholder>() {
     //this function is needed to set data from home HomeActivity
     fun setData(arrData : List<MealCategoryItems>){
         mainCatList = arrData as ArrayList<MealCategoryItems>
+    }
+
+    fun setClickListener(listener1: OnItemClickListener) {
+        listener = listener1
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewholder {
@@ -41,7 +44,13 @@ class MainCatAdapter: RecyclerView.Adapter<MainCatAdapter.RecipeViewholder>() {
 
     override fun onBindViewHolder(holder: RecipeViewholder, position: Int) {
         holder.tvRecipeName.text = mainCatList[position].strcategory
-        Glide.with(ctx!!).load(mainCatList[position].strcategorythumb).into(holder.imgDish)        }
-
+        Glide.with(ctx!!).load(mainCatList[position].strcategorythumb).into(holder.imgDish)
+        holder.itemView.setOnClickListener {
+            listener?.onClicked(mainCatList[position].strcategory)
+        }
     }
 
+    interface OnItemClickListener {
+        fun onClicked(categoryName:String)
+    }
+}

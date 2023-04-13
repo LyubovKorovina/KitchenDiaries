@@ -10,6 +10,7 @@ import com.example.kitchendiaries.adapters.MainCatAdapter
 import com.example.kitchendiaries.adapters.SubCatAdapter
 import com.example.kitchendiaries.database.RecipiesDB
 import com.example.kitchendiaries.entities.MealCategoryItems
+import com.example.kitchendiaries.entities.MealsItems
 import com.example.kitchendiaries.entities.RecipeModel
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,7 @@ class HomeActivity : MainActivity() {
 
     //Here we are initializing Adapter and Category array lists
     var mainCatArray = ArrayList<MealCategoryItems>()
-    var subCatArray = ArrayList<RecipeModel>()
+    var subCatArray = ArrayList<MealsItems>()
     var mainCatAdapter = MainCatAdapter()
     var subCatAdapter = SubCatAdapter()
 
@@ -39,23 +40,18 @@ class HomeActivity : MainActivity() {
 
         getDataFromDb()
 
+        mainCatAdapter.setClickListener(onClicked)
+
         // Initialize rv_mainCategory and rv_subCategory
         rv_mainCategory = findViewById(R.id.rv_mainCategory)
         rv_subCategory = findViewById(R.id.rv_subCategory)
 
+    }
 
-        subCatArray.add(RecipeModel(1, "Carrot pie"))
-        subCatArray.add(RecipeModel(2, "Fried Chicken"))
-        subCatArray.add(RecipeModel(3, "Banana pancake"))
-        subCatArray.add(RecipeModel(4, "Lemonade"))
-
-        subCatAdapter.setData(subCatArray)
-
-
-
-        // Set subCatAdapter to rv_subCategory (assuming you have another RecyclerView named rv_subCategory)
-        rv_subCategory.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
-        rv_subCategory.adapter = subCatAdapter
+    private val onClicked = object : MainCatAdapter.OnItemClickListener{
+        override fun onClicked(categoryName: String){
+            getMealDataFromDb(categoryName)
+        }
     }
 
     private fun getDataFromDb(){
@@ -64,14 +60,26 @@ class HomeActivity : MainActivity() {
                 var cat = RecipiesDB.getDB(this@HomeActivity).recipeDao().getAllCategories()
                 mainCatArray = cat as ArrayList<MealCategoryItems>
                 mainCatArray.reverse()
-
                 mainCatAdapter.setData(mainCatArray)
                 //Here we are setting an adapter to RecycleView
+
+                getMealDataFromDb(mainCatArray[0].strcategory)
                 rv_mainCategory.layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, true)
                 rv_mainCategory.adapter = mainCatAdapter
             }
+        }
+    }
 
-
+    private fun getMealDataFromDb(categoryName:String){
+        launch {
+            this.let {
+                var cat = RecipiesDB.getDB(this@HomeActivity).recipeDao().getSpecificMealList(categoryName)
+                subCatArray = cat as ArrayList<MealsItems>
+                subCatAdapter.setData(subCatArray)
+                //Here we are setting an adapter to RecycleView
+                rv_subCategory.layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, true)
+                rv_subCategory.adapter = subCatAdapter
+            }
         }
     }
 }

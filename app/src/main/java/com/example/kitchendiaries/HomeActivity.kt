@@ -14,7 +14,6 @@ import com.example.kitchendiaries.entities.MealsItems
 import com.example.kitchendiaries.entities.RecipeModel
 import kotlinx.coroutines.launch
 
-
 class HomeActivity : MainActivity() {
 
     //Here we are initializing Adapter and Category array lists
@@ -26,6 +25,7 @@ class HomeActivity : MainActivity() {
     // Declare as lateinit
     private lateinit var rv_mainCategory: RecyclerView
     private lateinit var rv_subCategory: RecyclerView
+    private lateinit var tvCategory: TextView // Added TextView for tvCategory
 
     //private lateinit var rv_mainCategory: RecyclerView
     // Initialize rv_mainCategory directly without using findViewById()
@@ -42,9 +42,10 @@ class HomeActivity : MainActivity() {
 
         mainCatAdapter.setClickListener(onClicked)
 
-        // Initialize rv_mainCategory and rv_subCategory
+        // Initialize rv_mainCategory, rv_subCategory, and tvCategory
         rv_mainCategory = findViewById(R.id.rv_mainCategory)
         rv_subCategory = findViewById(R.id.rv_subCategory)
+        tvCategory = findViewById(R.id.tvCategory)
 
     }
 
@@ -71,6 +72,7 @@ class HomeActivity : MainActivity() {
     }
 
     private fun getMealDataFromDb(categoryName:String){
+        tvCategory.text = "$categoryName Category"
         launch {
             this.let {
                 var cat = RecipiesDB.getDB(this@HomeActivity).recipeDao().getSpecificMealList(categoryName)

@@ -56,7 +56,7 @@
             tools:listitem="@layout/main_category_item_rv" />
 
         <TextView
-            android:id="@+id/font"
+            android:id="@+id/tvCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"

@@ -16,11 +16,9 @@
         app:cardElevation="5dp">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
             android:id="@+id/img_dish"
-            android:src="@drawable/dish_example"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.cardview.widget.CardView>
 
